@@ -9,11 +9,11 @@ pid_badvpn=$(ps x | grep badvpn | grep -v grep | awk '{print $1}')
 if [ "$pid_badvpn" = "" ]; then
     msg -ama "$(fun_trans "Liberando Badvpn")"
     msg -bar
-    if [[ ! -e /bin/badvpn-udpgw ]]; then
+    if [[ ! -e /usr/bin/badvpn-udpgw ]]; then
     wget -O /usr/bin/badvpn-udpgw https://github.com/CarlosPBric/VPS-Manager/blob/master/badvpn-udpgw?raw=true -o /dev/null
-	chmod +x /usr/bin/badvpn-udpgw
+    chmod +x /usr/bin/badvpn-udpgw
     fi
-    screen -dmS screen usr/bin/badvpn-udpgw --listen-addr 127.0.0.1:7300 --max-clients 1000 --max-connections-for-client 10
+    screen -dmS screen /usr/bin/badvpn-udpgw --listen-addr 127.0.0.1:7300 --max-clients 1000 --max-connections-for-client 10
     [[ "$(ps x | grep badvpn | grep -v grep | awk '{print $1}')" ]] && msg -ama "$(fun_trans "Sucesso")" || msg -ama "$(fun_trans "Falhou")"
 else
     msg -ama "$(fun_trans "Parando Badvpn")"
